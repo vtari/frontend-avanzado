@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { FakeBackendService } from '../../shared/inmemory-db/inmemory-db.service';
 
 @Component({
   selector: 'app-signin',
@@ -6,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
+    signingForm: FormGroup;
 
-  constructor() { }
+    // Crear formulario de login
+    createFormGroup() {
+        return new FormGroup({
+            email: new FormControl(''),
+            password: new FormControl(''),
+        })
+    }
+    constructor(private fakeBackend: FakeBackendService) {
+        this.signingForm = this.createFormGroup();
+    }
+    ngOnInit() {
+    }
 
-  ngOnInit() {
-  }
+    //limpiar formulario
+    resetForm() {
+        this.signingForm.reset();
+    }
 
 }

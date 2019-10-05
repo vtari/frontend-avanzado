@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
         this.appservice.createTask(postData).subscribe(data => {
             this.loading = false;
             this.getAllTasks();
-            this.myTask = “”;
+            this.myTask = "";
         });
     } //create
     edit(task) {
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
         });
     } //saveEdit
     delete(task) {
-        console.log(“Delete”);
+        console.log("Delete");
         this.appservice.deleteTask(task.id).subscribe(data => {
             this.getAllTasks();
         });
