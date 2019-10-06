@@ -9,6 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FakeBackendService } from './shared/inmemory-db/inmemory-db.service';
 import { ButtonsModule } from 'ngx-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { DashboardModule } from './views/dashboard/dashboard.module';
+import { ForgotPasswordModule } from './views/forgot-password/forgot-password.module';
+import { FavoritesModule } from './views/favorites/favorites.module';
+import { OffersModule } from './views/offers/offers.module';
+import { ProfileModule } from './views/profile/profile.module';
+import { SignupModule } from './views/signup/signup.module';
+import { SigninModule } from './views/signin/signin.module';
+
 
 
 @NgModule({
@@ -20,6 +28,13 @@ import { ToastrModule } from 'ngx-toastr';
         ToastrModule.forRoot(),
         ReactiveFormsModule,
         FormsModule,
+        DashboardModule,
+        ForgotPasswordModule,
+        FavoritesModule,
+        OffersModule,
+        ProfileModule,
+        SignupModule,
+        SigninModule,
         InMemoryWebApiModule
   ],
     declarations: [AppComponent],

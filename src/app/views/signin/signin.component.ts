@@ -5,8 +5,7 @@ import { Router } from "@angular/router";
 import { setTheme } from 'ngx-bootstrap/utils';
 import { SigninService } from './signin.service';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../../shared/models/user.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-signin',
@@ -21,7 +20,7 @@ export class SigninComponent implements OnInit {
 
     constructor(private fakeBackend: FakeBackendService, private router: Router, private formBuilder: FormBuilder,
         private signinService: SigninService, private toastService: ToastrService) {
-        setTheme('bs4'); // or 'bs4'
+        setTheme('bs4'); 
         this.signinForm = this.formBuilder.group({
             email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(5)]),
             password: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -52,7 +51,7 @@ export class SigninComponent implements OnInit {
             }        
             
         } else {
-            this.toastService.error('El usuario o contraseña son incorrectos', 'Error', { timeOut: 3000            });
+            this.toastService.error('El usuario o contraseña son incorrectos', 'Error', { timeOut: 3000});
         }
 
         
@@ -61,7 +60,7 @@ export class SigninComponent implements OnInit {
     
      
     //remember password
-    remember() {
+    rememberPassword() {
         this.router.navigate(['/forgot-password/']);
     }
     //limpiar formulario
