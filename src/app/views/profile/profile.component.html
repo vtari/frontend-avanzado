@@ -4,26 +4,26 @@
   <div class="column">
     <figure class="figure">
       <img [src]="imageURL" class="figure-img img-fluid rounded" alt="A generic profile figure." width="150">
-      <figcaption class="figure-caption">Nombre y Apellidos</figcaption>
+      <figcaption class="figure-caption">{{user.name}} {{user.surname}}</figcaption>
     </figure>
   </div>
   <div class="column">
     <ul class="list-group">
-      <li class="list-group-item-app">Email: </li>
-      <li class="list-group-item-app">Fecha de nacimiento: </li>
-      <li class="list-group-item-app">Teléfono</li>
-      <li class="list-group-item-app">NIF/NIE:</li>
-      <li class="list-group-item-app">Permiso de conducir: </li>
+      <li class="list-group-item-app"><b>Email:</b> {{user.name}}</li>
+      <li class="list-group-item-app"><b>Fecha de nacimiento:</b> {{user.birthdate}}</li>
+      <li class="list-group-item-app"><b>Teléfono:</b> {{user.phone}}</li>
+      <li class="list-group-item-app"><b>NIF/NIE: </b>{{user.documentType.uid}}</li>
+      <li class="list-group-item-app"><b>Permiso de conducir:</b> {{user.license}} </li>
 
     </ul>
   </div>
   <div class="column">
     <label>Acerca de mi...</label>
-    <p>Aqui va relleno</p>
+    <p>{{user.aboutMe}}</p>
   </div>
   <div class="column">
     <label>Otras competencias</label>
-    <p>Aqui va relleno</p>
+    <p>{{user.otherCompetences}}</p>
   </div>
 </div>
 
@@ -41,27 +41,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
+    <tr *ngFor="let study of user.studies">
+
+      <td>{{study.level.name}}</td>
+      <td>{{study.title.name}}</td>
+      <td>{{study.institution.name}}</td>
+      <td>{{study.date}}</td>
+      <td></td>
+
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td>@mdo</td>
-    </tr>
+    
   </tbody>
 </table>
 
@@ -76,24 +65,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
+    <tr *ngFor="let experiencie of user.experiencies">
+
+      <td>{{experiencie.enterprise.name}}</td>
+      <td>{{experiencie.level.name}}</td>
+      <td>{{experiencie.date}}</td>
+      <td></td>
 
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
 
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-
-    </tr>
   </tbody>
 </table>
 
@@ -108,24 +88,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
+    <tr *ngFor="let language of user.languages">
+
+      <td>{{language.level.name}}</td>
+      <td>{{language.name.name}}</td>
+      <td>{{language.date}}</td>
 
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
 
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-
-    </tr>
   </tbody>
 </table>
 

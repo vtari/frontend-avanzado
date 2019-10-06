@@ -27,7 +27,7 @@ export class SigninService {
         return this.fakeBackend.createDb().users;
     }
     async login(email, password) {
-        console.log(email);
+        
         const users = this.getUsers();
         const user = users.find((user: any) => user.email === email && user.password === password);
         if (user != null) {
