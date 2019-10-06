@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { FakeBackendService } from '../../shared/inmemory-db/inmemory-db.service';
+import { Router } from "@angular/router";
+import { setTheme } from 'ngx-bootstrap/utils';
+import { SigninService } from './signin.service';
+import { ToastrService } from 'ngx-toastr';
+import { User } from '../../shared/models/user.model';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-signin',
@@ -8,24 +14,59 @@ import { FakeBackendService } from '../../shared/inmemory-db/inmemory-db.service
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
-    signingForm: FormGroup;
+    signinForm: FormGroup;
+    imageURL: String;
+    submitted =  false;
+    
 
-    // Crear formulario de login
-    createFormGroup() {
-        return new FormGroup({
-            email: new FormControl(''),
-            password: new FormControl(''),
-        })
-    }
-    constructor(private fakeBackend: FakeBackendService) {
-        this.signingForm = this.createFormGroup();
+    constructor(private fakeBackend: FakeBackendService, private router: Router, private formBuilder: FormBuilder,
+        private signinService: SigninService, private toastService: ToastrService) {
+        setTheme('bs4'); // or 'bs4'
+        this.signinForm = this.formBuilder.group({
+            email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(5)]),
+            password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+        });
+        this.imageURL = "../assets/img/uoc_nuevo_logo.jpg";
+        
     }
     ngOnInit() {
     }
 
+   
+    get email() { return this.signinForm.get('email'); }
+    get password() { return this.signinForm.get('password');}
+
+
+    //login
+    async login() {
+        this.submitted = true;
+        if (this.signinForm.valid) {
+
+            var response = await this.signinService.login(this.email.value, this.password.value);          
+            if (response != null) {
+                this.router.navigate(['/dashboard/' + response.id]);
+
+            } else {
+                this.toastService.error('El usuario o contraseña son incorrectos', 'Error', { timeOut: 3000 });
+
+            }        
+            
+        } else {
+            this.toastService.error('El usuario o contraseña son incorrectos', 'Error', { timeOut: 3000            });
+        }
+
+        
+    }
+
+    
+     
+    //remember password
+    remember() {
+        this.router.navigate(['/forgot-password/']);
+    }
     //limpiar formulario
     resetForm() {
-        this.signingForm.reset();
+        this.signinForm.reset();
     }
 
 }

@@ -5,19 +5,25 @@ import { CoreModule } from './shared/core.module';
 import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app-routing';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { FakeBackendService } from './fake-backend.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FakeBackendService } from './shared/inmemory-db/inmemory-db.service';
+import { ButtonsModule } from 'ngx-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   imports: [
     SharedModule,
     CoreModule,
-    RouterModule.forRoot(rootRouterConfig, { useHash: false }),
-    InMemoryWebApiModule.forRoot(FakeBackendService),
-    ReactiveFormsModule
+        RouterModule.forRoot(rootRouterConfig, { useHash: false }),
+        ButtonsModule.forRoot(),
+        ToastrModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule,
+        InMemoryWebApiModule
   ],
-  declarations: [AppComponent],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    providers: [FakeBackendService],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

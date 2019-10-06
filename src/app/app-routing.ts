@@ -1,4 +1,5 @@
-import { Routes } from "@angular/router";
+import { Routes, RouterModule } from "@angular/router";
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 /* import { AdminLayoutComponent } from './shared/components/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './shared/components/layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './shared/services/auth/auth.guard'; */
@@ -6,7 +7,7 @@ import { AuthGuard } from './shared/services/auth/auth.guard'; */
 export const rootRouterConfig: Routes = [
   {
     path: "",
-    redirectTo: "signin",
+        redirectTo: "signin",
     pathMatch: "full"
   },
   {
@@ -14,7 +15,16 @@ export const rootRouterConfig: Routes = [
     loadChildren: () =>
       import("./views/signin/signin.module").then(m => m.SigninModule),
     data: { title: "Signin" }
-  },
+    },
+    {
+        path: "dashboard/:id",
+        loadChildren: () =>
+            import("./views/dashboard/dashboard.module").then(
+                m => m.DashboardModule
+            ),
+
+        data: { title: "Dashboard", breadcrumb: "DASHBOARD" }
+    },
   {
     path: "forgot-password",
     loadChildren: () =>
@@ -28,14 +38,15 @@ export const rootRouterConfig: Routes = [
     loadChildren: () =>
       import("./views/signup/signup.module").then(m => m.SignupModule),
     data: { title: "Signup" }
-  },
-  {
+    }
+  ,
+  /*{
     path: "admin",
-    /*  component: AdminLayoutComponent, */
-    /* canActivate: [AuthGuard], */
+      component: AdminLayoutComponent, 
+     canActivate: [AuthGuard], 
     children: [
       {
-        path: "dashboard",
+        path: "dashboard/:id",
         loadChildren: () =>
           import("./views/dashboard/dashboard.module").then(
             m => m.DashboardModule
@@ -65,7 +76,7 @@ export const rootRouterConfig: Routes = [
         data: { title: "Offers", breadcrumb: "Offers" }
       }
     ]
-  },
+  },*/
   {
     path: "**",
     redirectTo: "sessions/404"

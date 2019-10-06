@@ -6,14 +6,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-    tasks: any[] = [];
-    myTask: string;
-    taskEdit: string;
-    editMode: boolean = false;
-    loading: boolean = false;
+export class AppComponent  {
+    //tasks: any[] = [];
+    //myTask: string;
+    //taskEdit: string;
+    //editMode: boolean = false;
+    //loading: boolean = false;
     title: "UOCJob";
-    constructor(private appservice: AppService) { }
+    /*constructor(private appservice: AppService) { }
     ngOnInit() {
         this.getAllTasks();
     } //ngOnInit
@@ -51,5 +51,5 @@ export class AppComponent implements OnInit {
         this.appservice.deleteTask(task.id).subscribe(data => {
             this.getAllTasks();
         });
-    } //delete
+    } //delete*/
 }
