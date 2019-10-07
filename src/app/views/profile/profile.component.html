@@ -24,6 +24,8 @@
   <div class="column">
     <label>Otras competencias</label>
     <p>{{user.otherCompetences}}</p>
+    <button type="submit" class="btn btn-primary" (click)="editPersonalData()"><i class="fa fa-pencil"></i></button>
+
   </div>
 </div>
 
@@ -38,6 +40,7 @@
       <th scope="col">Centro</th>
       <th scope="col">Fecha</th>
       <th scope="col">Certificado</th>
+      <th scope="col">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -48,7 +51,11 @@
       <td>{{study.institution.name}}</td>
       <td>{{study.date}}</td>
       <td></td>
+      <td style="display:inline-flex">
 
+        <button type="submit" class="btn btn-danger" (click)="deleteStudies()"><i class="fa fa-trash"></i></button>
+        <button type="submit" class="btn btn-primary" (click)="editStudies()"><i class="fa fa-pencil"></i></button>
+      </td>
     </tr>
     
   </tbody>
@@ -70,7 +77,7 @@
       <td>{{experiencie.enterprise.name}}</td>
       <td>{{experiencie.level.name}}</td>
       <td>{{experiencie.date}}</td>
-      <td></td>
+     
 
     </tr>
 
@@ -84,6 +91,8 @@
       <th scope="col">Nivel</th>
       <th scope="col">Idioma</th>
       <th scope="col">Fecha</th>
+      <th scope="col">Acciones</th>
+
 
     </tr>
   </thead>
@@ -93,7 +102,11 @@
       <td>{{language.level.name}}</td>
       <td>{{language.name.name}}</td>
       <td>{{language.date}}</td>
+      <td style="display:inline-flex">
 
+        <button type="submit" class="btn btn-danger" (click)="deleteLanguage()"><i class="fa fa-trash"></i></button>
+        <button type="submit" class="btn btn-primary" (click)="editLanguage()"><i class="fa fa-pencil"></i></button>
+      </td>
     </tr>
 
   </tbody>

@@ -37,8 +37,25 @@ export const rootRouterConfig: Routes = [
     loadChildren: () =>
       import("./views/signup/signup.module").then(m => m.SignupModule),
     data: { title: "Signup" }
-    }
-  ,
+    },
+    {
+        path: "profile-personal-data-form/:id",
+        loadChildren: () =>
+            import("./views/profile-personal-data-form/profile-personal-data-form.module").then(m => m.ProfilePersonalDataFormModule),
+        data: { title: "Personal Data Form" }
+    },
+    {
+        path: "profile-academic-training-form/:id",
+        loadChildren: () =>
+            import("./views/profile-academic-training-form/profile-academic-training-form.module").then(m => m.ProfileAcademicTrainingFormModule),
+        data: { title: "Academic Training Form" }
+    },
+    {
+        path: "profile-idioms-form/:id",
+        loadChildren: () =>
+            import("./views/profile-idioms-form/profile-idioms-form.module").then(m => m.ProfileIdiomsFormModule),
+        data: { title: "Idioms Form" }
+    },
   /*{
     path: "admin",
       component: AdminLayoutComponent, 
