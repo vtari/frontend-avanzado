@@ -19,6 +19,7 @@ import { SigninModule } from './views/signin/signin.module';
 import { ProfileAcademicTrainingFormModule } from './views/profile-academic-training-form/profile-academic-training-form.module';
 import { ProfileIdiomsFormModule } from './views/profile-idioms-form/profile-idioms-form.module';
 import { ProfilePersonalDataFormModule } from './views/profile-personal-data-form/profile-personal-data-form.module';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ProfilePersonalDataFormModule } from './views/profile-personal-data-for
         ProfileAcademicTrainingFormModule,
         ProfileIdiomsFormModule,
         ProfilePersonalDataFormModule,
-        InMemoryWebApiModule
+        InMemoryWebApiModule,
+        CKEditorModule
   ],
     declarations: [AppComponent],
     providers: [FakeBackendService],

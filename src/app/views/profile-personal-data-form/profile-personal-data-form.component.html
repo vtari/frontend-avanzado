@@ -80,16 +80,20 @@
 
           <div class="form-group">
             <label for="inputAboutMe">Sobre mí</label>
-            <textarea class="form-control" id="inputAboutMe" rows="3"></textarea>
+            <ckeditor [editor]="Editor" id="inputAboutMe" data=""></ckeditor>
 
-        </div>
+            <!-- <textarea class="form-control" id="inputAboutMe" rows="3"></textarea> -->
+
+          </div>
           <div class="form-group">
             <label for="inputOtherCompetences">Otras competencias</label>
-            <textarea class="form-control" id="inputOtherCompetences" rows="3"></textarea>
+            <ckeditor [editor]="Editor" id="inputOtherCompetences" data=""></ckeditor>
 
-        </div>
+            <!-- <textarea class="form-control" id="inputOtherCompetences" rows="3"></textarea>-->
+
+          </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
   </div>
   </div>
-  
+
