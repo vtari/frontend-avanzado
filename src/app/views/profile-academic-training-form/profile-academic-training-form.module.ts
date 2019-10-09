@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileAcademicTrainingFormComponent } from './profile-academic-training-form.component';
 import { ProfileAcademicTrainingRoutingModule } from './profile-academic-training-routing.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -9,7 +10,9 @@ import { ProfileAcademicTrainingRoutingModule } from './profile-academic-trainin
     declarations: [ProfileAcademicTrainingFormComponent],
   imports: [
       CommonModule,
-      ProfileAcademicTrainingRoutingModule
+      ProfileAcademicTrainingRoutingModule,
+      FormsModule,
+      ReactiveFormsModule
   ]
 })
 export class ProfileAcademicTrainingFormModule { }

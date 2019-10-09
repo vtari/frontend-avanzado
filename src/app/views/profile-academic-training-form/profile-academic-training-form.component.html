@@ -1,1 +1,122 @@
-<p>profile-academic-training-form works!</p>
+<h1>Academic Training Form</h1>
+<div class="form-container">
+  <form [formGroup]="academicTrainingForm">
+    <div class="form-row">
+
+      <div class="column  col-md-6">
+        <div class="form-group">
+          <label for="inputTitleType">Tipo de título</label>
+          <select formControlName="inputTitleType" #t (change)="onChange(t.value)" class="form-control">
+            <option [value]="titleType" *ngFor="let titleType of titleTypes">{{titleType}}</option>
+          </select>
+        </div>
+
+
+      </div>
+    </div>
+  </form>
+
+  <form [formGroup]="universityForm" *ngIf="showUniversityForm">
+    <h2>Estudios universitarios</h2>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCenterName">Nombre del centro</label>
+        <input type="text" class="form-control" formControlName="inputCenterName" placeholder="Nombre del centro" value="{{user.studies.institution.name}}">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputTitle">Título</label>
+        <input type="text" class="form-control" formControlName="inputTitle" placeholder="Nombre del Título" value="{{user.studies.title.name}}">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputTitleDate">Fecha del Título</label>
+        <input type="date" class="form-control" formControlName="inputTitleDate" placeholder="Fecha del título" value="{{user.studies.date}}">
+      </div>
+
+    </div>
+    <div class="form-row">
+      <div class="form-group ">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="inputBilingualStudies" formControlName="inputBilingualStudies">
+          <label class="form-check-label" for="inputBilingualStudies">Formación bilingüe</label>
+        </div>
+      </div>
+    </div>
+      <div class="form-row">
+        <div class="column col-md-8 certUp">
+          <div class="imagePreview"></div>
+          <label class="btn btn-primary">
+            Subir Certificado<input type="file" formControlName="inputUploadFile" class="uploadFile cert" value="Sube certificado" style="width: 0px;height: 0px;overflow: hidden;">
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+
+  <form [formGroup]="cycleForm" *ngIf="showCycleForm">
+    <h2>Estudios Ciclos formativos</h2>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCenterName">Centro educativo</label>
+        <select formControlName="inputCenterName" class="form-control">
+          <option [value]="centerName" *ngFor="let centerName of centersName">{{centerName}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputProFamily">Centro educativo</label>
+        <select formControlName="inputProFamily" class="form-control">
+          <option [value]="proFamily" *ngFor="let proFamily of proFamilies">{{proFamily}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputGrade">Grado</label>
+        <select formControlName="inputGrade" class="form-control">
+          <option [value]="grade" *ngFor="let grade of grades">{{grade}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputCicles">Ciclo</label>
+        <select formControlName="inputCycles" class="form-control">
+          <option [value]="cycle" *ngFor="let cycle of cycles">{{cycle}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group ">
+        <label for="inputTitleDate">Fecha de obtención del título</label>
+        <input type="date" class="form-control" formControlName="inputTitleDate" placeholder="" value="{{user.studies.date}}">
+      </div>
+
+    </div>
+    <div class="form-row">
+      <div class="form-group ">
+        <div class="form-check col-md-6">
+          <input type="checkbox" class="form-check-input" id="inputDualStudies" formControlName="inputDualStudies">
+          <label class="form-check-label" for="inputDualStudies">Formación dual</label>
+        </div>
+      </div>
+      <div class="form-group ">
+        <div class="form-check col-md-6">
+          <input type="checkbox" class="form-check-input" id="inputBilingualStudies" formControlName="inputBilingualStudies">
+          <label class="form-check-label" for="inputBilingualStudies">Formación bilingüe</label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="column col-md-8 certUp">
+        <div class="imagePreview"></div>
+        <label class="btn btn-primary">
+          Subir Certificado<input type="file" formControlName="inputUploadFile" class="uploadFile cert" value="Sube certificado" style="width: 0px;height: 0px;overflow: hidden;">
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+</div>
+
+

@@ -22,8 +22,12 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     }
 
-    editPersonalData() {
+    private editPersonalData() {
         this.router.navigate(['/profile-personal-data-form/'+this.id]);
+    }
+
+    private editStudies() {
+        this.router.navigate(['/profile-academic-training-form/' + this.id]);
     }
     
 
