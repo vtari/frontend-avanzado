@@ -13,9 +13,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
-    signinForm: FormGroup;
-    imageURL: String;
-    submitted =  false;
+    private signinForm: FormGroup;
+    private imageURL: String;
+    private submitted =  false;
     
 
     constructor(private fakeBackend: FakeBackendService, private router: Router, private formBuilder: FormBuilder,

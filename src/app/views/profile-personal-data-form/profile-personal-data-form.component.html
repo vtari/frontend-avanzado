@@ -1,99 +1,94 @@
 <h1>Personal Data Form</h1>
+<div class="form-container">
+  <form [formGroup]="personalDataForm">
+    <div class="form-row">
+      <div class="column col-md-4 imgUp">
 
-<div class="row">
-  <div class="column col-md-4">
-    <figure class="figure">
-      <img [src]="imageURL" class="figure-img img-fluid rounded" alt="A generic profile figure." width="150">
-      <figcaption class="figure-caption">{{user.email}}</figcaption>
-    </figure>
-  </div>
-  <div class="column col-md-6">
-    <form>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputName">Nombre</label>
-          <input type="text" class="form-control" id="inputName" placeholder="Nombre">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="inputSurname">Apellidos</label>
-          <input type="text" class="form-control" id="inputSurname" placeholder="Apellidos">
-        </div>
+        <div class="imagePreview"></div>
+        <label class="btn btn-primary">
+          Upload<input type="file" formControlName="inputAvatar" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+        </label>
+        <figcaption class="figure-caption">{{user.email}}</figcaption>
       </div>
-        <div class="form-group">
-          <label for="inputBirthdayDate">Fecha de Nacimiento</label>
-          <input type="date" class="form-control" id="inputBirthdayDate" placeholder="">
-        </div>
+
+      <div class="column  col-md-6">
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="inputPhone1">Teléfono 1</label>
-            <input type="tel" class="form-control" id="inputPhone1">
+            <label for="inputName">Nombre</label>
+            <input type="text" class="form-control" formControlName="inputName" placeholder="Nombre" value="{{user.name}}">
           </div>
           <div class="form-group col-md-6">
-            <label for="inputPhone2">Teléfono 2</label>
-            <input type="tel" class="form-control" id="inputPhone2">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputDocument">DNI/NIF</label>
-            <select id="inputDocument" class="form-control">
-              <option selected>Elige...</option>
-              <option>DNI</option>
-              <option>NIE</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputNumber">Número</label>
-            <input type="text" class="form-control" id="inputNumber" placeholder="00000000A">
+            <label for="inputSurname">Apellidos</label>
+            <input type="text" class="form-control" formControlName="inputSurname" placeholder="Apellidos" value="{{user.surname}}">
           </div>
         </div>
           <div class="form-group">
+            <label for="inputBirthdayDate">Fecha de Nacimiento</label>
+            <input type="date" class="form-control" formControlName="inputBirthdayDate" placeholder="" value="{{user.birthdate}}">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputPhone1">Teléfono 1</label>
+              <input type="tel" class="form-control" formControlName="inputPhone1" value="{{user.phone}}">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPhone2">Teléfono 2</label>
+              <input type="tel" class="form-control" formControlName="inputPhone2" value="{{user.phone2}}">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputDocument">DNI/NIF</label>
+              <select formControlName="inputDocument" #iDoc (change)="changeValidation(iDoc.value)" class="form-control">
+                <option [value]="documentType" *ngFor="let documentType of documentTypes">{{documentType}}</option>
+               </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputNumber">Número</label>
+              <input type="text" class="form-control" formControlName="inputNumber" placeholder="00000000A" value="{{user.documentNumber}}">
+            </div>
+          </div>
+          <div class="form-group">
             <label for="inputAddress">Dirección</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="C/ Estación...">
+            <input type="text" class="form-control" formControlName="inputAddress" placeholder="C/ Estación..." value="{{user.address.street}}">
           </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputProvince">Provincia</label>
-            <select id="inputProvince" class="form-control">
-              <option selected>Elige...</option>
-              <option>Alicante</option>
-              <option>Valencia</option>
-              <option>Castellón</option>
-              <option>Barcelona</option>
-            </select>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputProvince">Provincia</label>
+              <select formControlName="inputProvince" class="form-control">
+                <option [value]="province" *ngFor="let province of provinces">{{province}}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputMunicipe">Municipio</label>
+              <select formControlName="inputMunicipe" class="form-control">
+                <option [value]="municipe" *ngFor="let municipe of municipes">{{municipe}}</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group col-md-6">
-            <label for="inputMunicipe">Municipio</label>
-            <select id="inputMunicipe" class="form-control">
-              <option selected>Elige...</option>
-              <option>Bétera</option>
-              <option>La Eliana</option>
-              <option>San Juan de Alicante</option>
-              <option>Onda</option>
-            </select>
-          </div>
-        </div>
-          <div class="form-group col-md-6">
+          <div class="form-group">
             <label for="inputLicense">Permiso de conducir</label>
-            <input type="text" class="form-control" id="inputLicense" placeholder="A1, B...">
+            <input type="text" class="form-control" formControlName="inputLicense" placeholder="A1, B..." value="{{user.license}}">
           </div>
 
           <div class="form-group">
             <label for="inputAboutMe">Sobre mí</label>
-            <ckeditor [editor]="Editor" id="inputAboutMe" data=""></ckeditor>
+            <ckeditor [editor]="Editor" formControlName="inputAboutMe" data="{{user.aboutMe}}"></ckeditor>
 
             <!-- <textarea class="form-control" id="inputAboutMe" rows="3"></textarea> -->
 
           </div>
           <div class="form-group">
             <label for="inputOtherCompetences">Otras competencias</label>
-            <ckeditor [editor]="Editor" id="inputOtherCompetences" data=""></ckeditor>
+            <ckeditor [editor]="Editor" formControlName="inputOtherCompetences" data="{{user.otherCompetences}}"></ckeditor>
 
             <!-- <textarea class="form-control" id="inputOtherCompetences" rows="3"></textarea>-->
 
           </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </form>
-  </div>
-  </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+  </form>
+</div>
+
 
