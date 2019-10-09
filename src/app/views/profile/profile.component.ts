@@ -26,8 +26,12 @@ export class ProfileComponent implements OnInit {
         this.router.navigate(['/profile-personal-data-form/'+this.id]);
     }
 
-    private editStudies() {
-        this.router.navigate(['/profile-academic-training-form/' + this.id]);
+    private editStudies(uid) {
+        this.router.navigate(['/profile-academic-training-form/' + uid]);
+    }
+
+    private editIdioms(uid) {
+        this.router.navigate(['/profile-academic-training-form/' + uid]);
     }
     
 

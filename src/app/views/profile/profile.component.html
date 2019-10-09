@@ -53,8 +53,8 @@
       <td></td>
       <td style="display:inline-flex">
 
-        <button type="submit" class="btn btn-danger" (click)="deleteStudies()"><i class="fa fa-trash"></i></button>
-        <button type="submit" class="btn btn-primary" (click)="editStudies()"><i class="fa fa-pencil"></i></button>
+        <button type="submit" class="btn btn-danger" #studyDelete value="{{study.uid}}" (click)="deleteStudies(studyDelete.value)"><i class="fa fa-trash"></i></button>
+        <button type="submit" class="btn btn-primary" #studyEdit value="{{study.uid}}" (click)="editStudies(studyEdit.value)"><i class="fa fa-pencil"></i></button>
       </td>
     </tr>
     
@@ -104,8 +104,8 @@
       <td>{{language.date}}</td>
       <td style="display:inline-flex">
 
-        <button type="submit" class="btn btn-danger" (click)="deleteLanguage()"><i class="fa fa-trash"></i></button>
-        <button type="submit" class="btn btn-primary" (click)="editLanguage()"><i class="fa fa-pencil"></i></button>
+        <button type="submit" class="btn btn-danger" #idiomDelete value="{{language.uid}}" (click)="deleteLanguage(idiomDelete.value)"><i class="fa fa-trash"></i></button>
+        <button type="submit" class="btn btn-primary" #idiomEdit value="{{language.uid}}" (click)="editLanguage(idiomEdit.value)"><i class="fa fa-pencil"></i></button>
       </td>
     </tr>
 

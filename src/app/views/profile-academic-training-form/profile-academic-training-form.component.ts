@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../../shared/models/user.model';
+import { Study } from '../../shared/models/study.model';
 
 @Component({
   selector: 'app-profile-academic-training-form',
@@ -9,7 +11,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./profile-academic-training-form.component.scss']
 })
 export class ProfileAcademicTrainingFormComponent implements OnInit {
-    private user: String;
+    private user: User;
+    private study: Study;
+    private studies: Study[];
     private id: any;
     private academicTrainingForm;
     private universityForm;
@@ -28,8 +32,17 @@ export class ProfileAcademicTrainingFormComponent implements OnInit {
         this.titleTypes = ['Título universitario', 'Ciclo formativo', 'otro título'];
         //id de usuario
         this.id = this.activatedRoute.snapshot.params.id;
+        console.log("Este es el uid" + this.id);
         // usuario actual almacenado en localStorage
         this.user = JSON.parse(localStorage.getItem("currentUser"));
+        //Estudios
+        for (var i = 0; i < this.user.studies.length; i++) {            
+            if (this.user.studies[i].uid == this.id) {
+                this.study = this.user.studies[i];
+            }
+        }        
+        console.log("Estdio: " + this.study.title.name);
+       
         //Formulario
         this.academicTrainingForm = this.formBuilder.group({
             inputTitleType: new FormControl('', [])         
@@ -61,6 +74,10 @@ export class ProfileAcademicTrainingFormComponent implements OnInit {
 
   ngOnInit() {
   }
+
+    private getStudy(study) {
+        return study.uid === this.id;
+}
     private onChange(value) {
         if (value == 'Título universitario') {
             this.showUniversityForm = true;
