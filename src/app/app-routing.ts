@@ -16,7 +16,7 @@ export const rootRouterConfig: Routes = [
     data: { title: "Signin" }
     },
     {
-        path: "dashboard/:id",
+        path: "dashboard/:id",        
         loadChildren: () =>
             import("./views/dashboard/dashboard.module").then(
                 m => m.DashboardModule
@@ -45,16 +45,28 @@ export const rootRouterConfig: Routes = [
         data: { title: "Personal Data Form" }
     },
     {
-        path: "profile-academic-training-form/:id",
+        path: "profile-academic-training-form/:mode/:id",
         loadChildren: () =>
             import("./views/profile-academic-training-form/profile-academic-training-form.module").then(m => m.ProfileAcademicTrainingFormModule),
         data: { title: "Academic Training Form" }
     },
     {
-        path: "profile-idioms-form/:id",
+        path: "profile-idioms-form/:mode/:id",
         loadChildren: () =>
             import("./views/profile-idioms-form/profile-idioms-form.module").then(m => m.ProfileIdiomsFormModule),
         data: { title: "Idioms Form" }
+    },
+    {
+        path: "offers/:id",
+        loadChildren: () =>
+            import("./views/offers/offers.module").then(m => m.OffersModule),
+        data: { title: "Offers", breadcrumb: "Offers" }
+    },
+    {
+        path: "offer-detail/:id",
+        loadChildren: () =>
+            import("./views/offer-detail/offer-detail.module").then(m => m.OfferDetailModule),
+        data: { title: "Offers Detail", breadcrumb: "Offer Detail" }
     },
   /*{
     path: "admin",

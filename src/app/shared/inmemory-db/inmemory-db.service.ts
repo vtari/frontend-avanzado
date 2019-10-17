@@ -1,5 +1,8 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { User } from '../models/user.model';
+import { User, Province, Municipe, DocumentType } from '../models/user.model';
+import { LevelStudy, Institution, Grade, Category, TitleStudy } from '../models/study.model';
+import { LanguageName, LanguageLevel } from '../models/language.model';
+import { Offer } from '../models/offer.model';
 
 export class FakeBackendService implements InMemoryDbService {
   createDb() {
@@ -25,12 +28,12 @@ export class FakeBackendService implements InMemoryDbService {
           province: { uid: 4, name: 'Cádiz' },
           municipe: { uid: 6, name: 'Chiclana de la Frontera' }
         },
-        avatar_hash: 'assets/img/perfil.png',
+        avatar_hash: '/assets/img/perfil.png',
         studies: [
           {
             uid: 1,
-            level: { uid: 1, name: 'Ciclo Formativo' },
-            category: { uid: 2, name: 'Informática y comunicaciones' },
+            level: { uid: 1, name: 'Ciclo formativo' },
+            category: { uid: 2, name: 'Informática y Comunicaciones' },
             institution: {
               uid: 2,
               name: 'IES Politécnico Jesús Marin'
@@ -54,8 +57,8 @@ export class FakeBackendService implements InMemoryDbService {
               uid: 2,
               name: 'IES Politécnico Jesús Marin'
             },
-            category: { uid: 2, name: 'Informática y comunicaciones' },
-            level: { uid: 1, name: 'Ciclo Formativo' },
+            category: { uid: 2, name: 'Informática y Comunicaciones' },
+            level: { uid: 1, name: 'Ciclo formativo' },
             title: {
               uid: 1,
               name: 'Técnico Superior en Desarrollo de Aplicaciones Web'
@@ -117,7 +120,7 @@ export class FakeBackendService implements InMemoryDbService {
       }
     ];
 
-    const offers: any[] = [
+    const offers: Offer[] = [
       {
         id: 1,
         company: {
@@ -187,7 +190,22 @@ export class FakeBackendService implements InMemoryDbService {
         category: { uid: 5, name: 'Administración y Gestión' },
         title: [{ uid: 6, name: 'Empresariales' }]
       }
-    ];
-    return { users, offers };
+      ];
+
+      const provinces: Province[] = [{ uid: 1, name: 'Alicante' }, { uid: 2, name: 'Valencia' }, { uid: 3, name: 'Castellón' }, { uid: 4, name: 'Barcelona' }, { uid: 5, name: 'Cádiz' }];
+      const municipes: Municipe[] = [{ uid: 1, name: 'Chiclana de la Frontera' }, { uid: 2, name: 'Barcelona' }, { uid: 3, name: 'San Juan de Alicante' }, { uid: 4, name: 'Gandia' }];
+      const titlesUniversity: TitleStudy[] = [{ uid: 1, name: 'Grado en Ingenieria Informática' }, { uid: 2, name: 'Grado en Biología' }, { uid: 3, name: 'Grado en Magisterio de Infantil' }];
+      const titlesCycles: TitleStudy[] = [{ uid: 1, name: 'Gestión Comercial y Empresarial' }, { uid: 2, name: 'Técnico Superior en Desarrollo de Aplicaciones Web' }, { uid: 3, name: 'Desarrollo Aplicaciones Multiplataforma' }, { uid: 4, name:'Administracion de sistemas informaticos y redes'}];
+      const gradeTypes: Grade[] = [{ uid: 1, name: 'Ciclo Formativo de Grado Superior' }, { uid: 2, name: 'Ciclo Formativo de  Grado Medio' }, { uid: 3, name: 'FP básica' }];
+      const familyTypes: Category[] = [{ uid: 1, name: 'Electricidad y electrónica' }, { uid: 2, name: 'Informática y Comunicaciones' }, { uid: 3, name: 'Comunicación y Marketing' }];
+      const educationalCenter: Institution[] = [{ uid: 1, name: 'IES Politécnico Jesús Marin' }, { uid: 1, name: 'IES Consellería' }, { uid: 3, name: 'IES La Oleana' }];
+      const titleTypes: LevelStudy[] = [{ uid: 1, name: 'Ciclo formativo' }, { uid: 2, name: 'Título universitario' }, { uid: 3, name: 'Otros títulos' }];
+      const documentTypes: DocumentType[] = [{ uid: 1, name: 'NIF' }, { uid: 2, name: 'Pasaporte' }, { uid: 3, name: 'Otro' }];
+      const languages: LanguageName[] = [{ uid: 1, name: 'Inglés' }, { uid: 2, name: 'Francés' }, { uid: 3, name: 'Italiano' }, {uid:4, name:'Otros'}];
+      const languageLevels: LanguageLevel[] = [{ uid: 1, name: 'A1' }, { uid: 2, name: 'A2' }, { uid: 3, name: 'B1' }, { uid: 4, name: 'B2' }, { uid: 5, name: 'C1' }, { uid: 6, name: 'C2' }];
+      return {
+          users, offers, provinces, municipes, titlesUniversity, titlesCycles,
+          gradeTypes, familyTypes, educationalCenter, titleTypes, documentTypes, languages, languageLevels
+      };
   }
 }

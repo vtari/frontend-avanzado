@@ -1,0 +1,72 @@
+<div class="form-container">
+  <h2>Job Detail</h2>
+
+  <div class="row">
+    <div class="column">
+      <ul class="list-group">
+        <li class="list-group-item-app">
+          <b>Oferta</b>
+          <ul>
+            <li class="list-group-item"><b>Empresa:</b> {{offer.company.name}}</li>
+            <li class="list-group-item"><b>Puesto:</b> {{offer.job.name}}</li>
+            <li class="list-group-item"><b>Descripción: </b>{{offer.job.description}}</li>
+
+          </ul>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <ul class="list-group">
+        <li class="list-group-item-app">
+          <b>Municipio</b>
+          <ul>
+            <li class="list-group-item"><b>Provincia:</b> {{offer.province.name}}</li>
+            <li class="list-group-item"><b>Municipio:</b> {{offer.municipe.name}}</li>
+
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <ul class="list-group">
+        <li class="list-group-item-app">
+          <b>Destinado a persona de</b>
+          <ul>
+            <li class="list-group-item"><b>Familia:</b> {{offer.category.name}}</li>
+            <li class="list-group-item">
+              <table class="table">
+                <thead>
+                  <tr class="table-info">
+                    <th scope="col">Titulaciones:</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let title of titles">
+                    <td>{{title.name}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </li>
+</ul>
+        </li>
+
+      </ul>
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <button type="submit" class="btn btn-warning" #idIncripcion value="{{offer.id}}" (click)="inscripcion(idIncripcion.value)">Inscripción</button>
+
+    </div>
+  </div>
+  </div>

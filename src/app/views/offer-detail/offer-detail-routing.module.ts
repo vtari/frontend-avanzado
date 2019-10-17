@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
+import { OfferDetailComponent } from './offer-detail.component';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfileIdiomsFormComponent } from './profile-idioms-form.component';
 import { AuthGuard } from '../../shared/helpers/auth.guard';
 
 
 const routes: Routes = [
     {
-        path: 'profile-idioms-form/:mode/:id',
-        component: ProfileIdiomsFormComponent,
+        path: 'offer-detail/:id',
+        component: OfferDetailComponent,
         canActivate: [AuthGuard]
     }
 ];
-
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class ProfileIdiomsRoutingModule { }
+export class OfferDetailRoutingModule { }

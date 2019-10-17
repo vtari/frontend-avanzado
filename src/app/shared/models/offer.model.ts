@@ -17,6 +17,7 @@ export interface CompanyOffer {
   name: string;
 }
 export interface JobOffer {
-  uid: number;
-  name: string;
+ // uid: number;
+    name: string;
+    description: string;
 }

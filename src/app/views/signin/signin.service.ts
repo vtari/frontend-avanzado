@@ -9,15 +9,17 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class SigninService {
+   
+    public user: User;
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-   
     constructor(private fakeBackend: FakeBackendService, 
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private toastService: ToastrService) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
+        
     }
 
     public get currentUserValue(): User {
@@ -29,14 +31,10 @@ export class SigninService {
     async login(email, password) {
         
         const users = this.getUsers();
-        const user = users.find((user: any) => user.email === email && user.password === password);
-        if (user != null) {
-            localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-        }
-        
-        return user;     
-       
+        this.user = users.find((user: any) => user.email === email && user.password === password);
+        localStorage.setItem('currentUser', JSON.stringify(this.user));
+        this.currentUserSubject.next(this.user);
+        return this.user;     
 
        
    }

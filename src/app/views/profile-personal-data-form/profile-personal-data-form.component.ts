@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular';
+import { ProfilePersonalDataFormService } from './profile-personal-data-form.service';
+import { SigninService } from '../signin/signin.service';
+import { Municipe, Province, DocumentType, User } from '../../shared/models/user.model';
 
 
 @Component({
@@ -11,29 +15,35 @@ import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from
   styleUrls: ['./profile-personal-data-form.component.scss']
 })
 export class ProfilePersonalDataFormComponent implements OnInit {
-
-    private user: String;
+    private user: User;
     private id: any;
-    public Editor = ClassicEditor;
+    private image;
+    public editorAboutMe = ClassicEditor;
+    public editorOtherCompetences = ClassicEditor;
+    private editorData;
     private personalDataForm: FormGroup;
-    private provinces;
-    private municipes;
-    private documentTypes;
+    private provinces: Province[];
+    private municipes: Municipe[];
+    private documentTypes: DocumentType[];
+
+      
 
     constructor(private activatedRoute: ActivatedRoute,
         private toastService: ToastrService, private router: Router,
-        private formBuilder: FormBuilder) {
-
+        private formBuilder: FormBuilder, private dataFormService: ProfilePersonalDataFormService, private signingService: SigninService) {
+        
         //Provincias
-        this.provinces = ['Alicante', 'Valencia', 'Barcelona', 'Castellón', 'Cádiz'];
+        this.setProvinces();
         //Municipios
-        this.municipes = ['Valencia', 'Bétera', 'Onil', 'Reus', 'Chiclana de la Frontera'];
+        this.setMunicipes();
         //Documento identificativo
-        this.documentTypes = ['NIF', 'Pasaporte', 'Otro'];
+        this.setDocumentTypes();
         //id de usuario
         this.id = this.activatedRoute.snapshot.params.id;
         // usuario actual almacenado en localStorage
-        this.user = JSON.parse(localStorage.getItem("currentUser"));
+        this.user = signingService.user;
+        //Obtenemos la imagen de perfil
+        this.image = this.user.avatar_hash;
         //Formulario
         this.personalDataForm = this.formBuilder.group({
             inputName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(55)]),
@@ -72,7 +82,22 @@ export class ProfilePersonalDataFormComponent implements OnInit {
             this.personalDataForm.get('inputNumber').setValidators(Validators.pattern(NIE_REGEX));
         }
     }
-   
-       
 
+    public onChange({ editor }: ChangeEvent) {
+        const data = editor.getData();
+
+        console.log(data);
+    }
+
+    private async setProvinces() {
+        this.provinces = await this.dataFormService.getAllProvinces();
+    }
+
+    private async setMunicipes() {
+        this.municipes = await this.dataFormService.getAllMunicipes();
+    }
+
+    private async setDocumentTypes() {
+        this.documentTypes = await this.dataFormService.getAllDocumentTypes();
+    }
 }

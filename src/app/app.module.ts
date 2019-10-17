@@ -20,6 +20,7 @@ import { ProfileAcademicTrainingFormModule } from './views/profile-academic-trai
 import { ProfileIdiomsFormModule } from './views/profile-idioms-form/profile-idioms-form.module';
 import { ProfilePersonalDataFormModule } from './views/profile-personal-data-form/profile-personal-data-form.module';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { OfferDetailModule } from './views/offer-detail/offer-detail.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
         ProfileModule,
         SignupModule,
         SigninModule,
+        OfferDetailModule,
         ProfileAcademicTrainingFormModule,
         ProfileIdiomsFormModule,
         ProfilePersonalDataFormModule,

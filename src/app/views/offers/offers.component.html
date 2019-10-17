@@ -1,3 +1,25 @@
-<p>
-  offers works!
-</p>
+<div class="form-container">
+  <h2>Ofertas de trabajo</h2>
+  <table class="table">
+    <thead>
+      <tr class="table-info">
+        <th scope="col">Puesto</th>
+        <th scope="col">Empresa</th>
+        <th scope="col">Familia profesional</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Provincia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let offer of selectedOffers" (click)="detalle(offer)">
+
+        <td>{{offer.job.name}}</td>
+        <td>{{offer.company.name}}</td>
+        <td>{{offer.category.name}}</td>
+        <td>{{offer.date}}</td>
+        <td>{{offer.province.name}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+  </div>

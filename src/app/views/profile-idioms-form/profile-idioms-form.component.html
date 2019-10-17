@@ -1,1 +1,80 @@
-<p>profile-idioms-form works!</p>
+<h1>Languages Form</h1>
+<!--FORMULARIO DE EDICIÓN-->
+
+<div class="form-container" *ngIf="isEdit == true">
+  <form [formGroup]="languageForm">
+    <div class="form-group col-md-6">
+      <label for="inputLanguages">Idiomas</label>
+      <select formControlName="inputLanguages" class="form-control" [(ngModel)]="language.name.name" (change)="onChange()">
+        <option [ngValue]="language.name" *ngFor="let language of languageNames">{{language.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputLevel">Nivel</label>
+      <select formControlName="inputLevel" class="form-control" [(ngModel)]="language.level.name">
+        <option [ngValue]="level.name" *ngFor="let level of levels">{{level.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputTitleDate">Fecha de obtención</label>
+      <input type="text" class="form-control" formControlName="inputTitleDate" placeholder="DD/MM/YYYY" value="{{language.date}}">
+      <div class="alert alert-danger" role="alert" *ngIf="date.invalid && (date.dirty || date.touched)">
+        <div class="container-error-message" *ngIf="date.errors.pattern">
+          The correct date pattern is DD/MM/YYYY
+        </div>
+
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <button type="submit" id="btnSave" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+
+  <!--FORMULARIO NUEVO-->
+
+<div class="form-container" *ngIf="isNew == true">
+  <form [formGroup]="languageForm">
+    <div class="form-group col-md-6">
+      <label for="inputLanguages">Idiomas</label>
+      <select formControlName="inputLanguages" class="form-control" (change)="onChange()">
+        <option [value]="language.name" *ngFor="let language of languageNames">{{language.name}}</option>
+      </select>
+    </div>
+    <div *ngIf="isVisible == true">
+      <div class="form-group col-md-6">
+        <label for="inputOthers">Otros idiomas</label>
+        <input type="text" class="form-control" formControlName="inputOthers" placeholder="Introduce otros idiomas" value="">
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="inputOthers.invalid && (inputOthers.dirty || inputOthers.touched)">
+        <div class="container-error-message" *ngIf="inputOthers.errors.minlength ">
+          El campo debe tener al menos 3 caracteres
+        </div>
+        <div class="container-error-message" *ngIf="inputOthers.errors.maxlength ">
+          El campo debe tener como máximo 255 caracteres
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputLevel">Nivel</label>
+      <select formControlName="inputLevel" class="form-control">
+        <option [value]="level.name" *ngFor="let level of levels">{{level.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputTitleDate">Fecha de obtención</label>
+      <input type="text" class="form-control" formControlName="inputTitleDate" placeholder="dd/mm/yyyy" value="">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <button type="submit" id="btnSave" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+

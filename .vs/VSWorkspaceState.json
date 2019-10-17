@@ -1,7 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\helpers",
+    "\\src\\app\\shared\\inmemory-db",
+    "\\src\\app\\views",
+    "\\src\\app\\views\\favorites",
+    "\\src\\app\\views\\forgot-password",
+    "\\src\\app\\views\\profile-academic-training-form"
   ],
+  "SelectedNode": "\\src\\app\\shared\\helpers\\auth.guard.ts",
   "PreviewInSolutionExplorer": false
 }

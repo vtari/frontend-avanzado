@@ -3,7 +3,6 @@
   float: left;
   width: 25%;
   padding: 10px;
-  height: 300px; /* Should be removed. Only for demonstration */
 }
 
 /* Clear floats after the columns */
@@ -20,4 +19,17 @@
   margin-bottom: -1px;
   background-color: #fff;
   /* border: 1px solid rgba(0,0,0,.125); */
+}
+
+#dataNew{
+  float:right;
+
+}
+
+#studyNew {
+  float: right;
+}
+
+#idiomNew {
+  float: right;
 }

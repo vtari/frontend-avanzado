@@ -2,9 +2,10 @@
 <div class="form-container">
   <form [formGroup]="personalDataForm">
     <div class="form-row">
-      <div class="column col-md-4 imgUp">
+      <div class="column col-md-3 imgUp">
 
-        <div class="imagePreview"></div>
+        <img src="{{image}}" alt="Imagen de perfil" class="imagePreview" />
+        
         <label class="btn btn-primary">
           Upload<input type="file" formControlName="inputAvatar" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
         </label>
@@ -24,7 +25,7 @@
         </div>
           <div class="form-group">
             <label for="inputBirthdayDate">Fecha de Nacimiento</label>
-            <input type="date" class="form-control" formControlName="inputBirthdayDate" placeholder="" value="{{user.birthdate}}">
+            <input type="text" class="form-control" formControlName="inputBirthdayDate" value="{{user.birthdate}}" placeholder="dd/mm/yyyy">
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -39,8 +40,8 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputDocument">DNI/NIF</label>
-              <select formControlName="inputDocument" #iDoc (change)="changeValidation(iDoc.value)" class="form-control">
-                <option [value]="documentType" *ngFor="let documentType of documentTypes">{{documentType}}</option>
+              <select formControlName="inputDocument" #iDoc (change)="changeValidation(iDoc.value)" class="form-control" [(ngModel)]="user.documentType.name">
+                <option [ngValue]="documentType.name" *ngFor="let documentType of documentTypes">{{documentType.name}}</option>
                </select>
             </div>
             <div class="form-group col-md-6">
@@ -55,14 +56,14 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputProvince">Provincia</label>
-              <select formControlName="inputProvince" class="form-control">
-                <option [value]="province" *ngFor="let province of provinces">{{province}}</option>
+              <select formControlName="inputProvince" class="form-control" [(ngModel)]="user.address.province.name">
+                <option [ngValue]="province.name" *ngFor="let province of provinces" >{{province.name}}</option>
               </select>
             </div>
             <div class="form-group col-md-6">
               <label for="inputMunicipe">Municipio</label>
-              <select formControlName="inputMunicipe" class="form-control">
-                <option [value]="municipe" *ngFor="let municipe of municipes">{{municipe}}</option>
+              <select formControlName="inputMunicipe" class="form-control" [(ngModel)]="user.address.municipe.name">
+                <option [ngValue]="municipe.name" *ngFor="let municipe of municipes">{{municipe.name}}</option>
               </select>
             </div>
           </div>
@@ -73,16 +74,16 @@
 
           <div class="form-group">
             <label for="inputAboutMe">Sobre mí</label>
-            <ckeditor [editor]="Editor" formControlName="inputAboutMe" data="{{user.aboutMe}}"></ckeditor>
+            <!--<ckeditor [editor]="editorAboutMe" formControlName="inputAboutMe" data="<p>hola</p>" contenteditable="true" ></ckeditor>-->
 
-            <!-- <textarea class="form-control" id="inputAboutMe" rows="3"></textarea> -->
+            <textarea class="form-control" id="inputAboutMe" rows="3"></textarea>
 
           </div>
           <div class="form-group">
             <label for="inputOtherCompetences">Otras competencias</label>
-            <ckeditor [editor]="Editor" formControlName="inputOtherCompetences" data="{{user.otherCompetences}}"></ckeditor>
+           <!--<ckeditor [editor]="editorOtherCompetences" formControlName="inputOtherCompetences" data="<p>hola</p>" contenteditable="true"></ckeditor>-->
 
-            <!-- <textarea class="form-control" id="inputOtherCompetences" rows="3"></textarea>-->
+             <textarea class="form-control" id="inputOtherCompetences" rows="3"></textarea>
 
           </div>
           <button type="submit" class="btn btn-primary">Guardar</button>

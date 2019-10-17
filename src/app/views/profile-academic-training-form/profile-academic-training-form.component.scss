@@ -8,7 +8,12 @@
   display: inline-block;
   box-shadow: 0px -3px 6px 2px rgba(0,0,0,0.2);
 }
-
+.imagePreview > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 38%;
+}
 .btn-primary {
   display: block;
   border-radius: 0px;

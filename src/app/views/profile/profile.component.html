@@ -1,114 +1,123 @@
-<h1>Student Profile</h1>
+<div class="form-container">
+  <h1>Student Profile</h1>
 
-<div class="row">
-  <div class="column">
-    <figure class="figure">
-      <img [src]="imageURL" class="figure-img img-fluid rounded" alt="A generic profile figure." width="150">
-      <figcaption class="figure-caption">{{user.name}} {{user.surname}}</figcaption>
-    </figure>
+  <div class="row">
+    <div class="column">
+      <figure class="figure">
+        <img [src]="imageURL" class="figure-img img-fluid rounded" alt="A generic profile figure." width="150">
+        <figcaption class="figure-caption">{{user.name}} {{user.surname}}</figcaption>
+      </figure>
+
+    </div>
+    <div class="column">
+      <ul class="list-group">
+        <li class="list-group-item-app"><b>Email:</b> {{user.name}}</li>
+        <li class="list-group-item-app"><b>Fecha de nacimiento:</b> {{user.birthdate}}</li>
+        <li class="list-group-item-app"><b>Teléfono:</b> {{user.phone}}</li>
+        <li class="list-group-item-app"><b>NIF/NIE: </b>{{user.documentNumber}}</li>
+        <li class="list-group-item-app"><b>Permiso de conducir:</b> {{user.license}} </li>
+
+      </ul>
+    </div>
+    <div class="column">
+      <label><b>Acerca de mi...</b></label>
+      <p>{{user.aboutMe}}</p>
+    </div>
+    <div class="column">
+      <label><b>Otras competencias</b></label>
+      <p>{{user.otherCompetences}}</p>
+
+
+    </div>
+
+
   </div>
-  <div class="column">
-    <ul class="list-group">
-      <li class="list-group-item-app"><b>Email:</b> {{user.name}}</li>
-      <li class="list-group-item-app"><b>Fecha de nacimiento:</b> {{user.birthdate}}</li>
-      <li class="list-group-item-app"><b>Teléfono:</b> {{user.phone}}</li>
-      <li class="list-group-item-app"><b>NIF/NIE: </b>{{user.documentType.uid}}</li>
-      <li class="list-group-item-app"><b>Permiso de conducir:</b> {{user.license}} </li>
+  <button type="submit" class="btn btn-primary" id="dataNew" (click)="editPersonalData()">Editar Datos</button>
 
-    </ul>
+  <br />
+  <h2>Formación académica</h2>
+  <table class="table">
+    <thead>
+      <tr class="table-info">
+        <th scope="col">Nivel</th>
+        <th scope="col">Título</th>
+        <th scope="col">Centro</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Certificado</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let study of studies">
+
+        <td>{{study.level.name}}</td>
+        <td>{{study.title.name}}</td>
+        <td>{{study.institution.name}}</td>
+        <td>{{study.date}}</td>
+        <td></td>
+        <td style="display:inline-flex">
+
+          <button type="submit" class="btn btn-primary" #studyEdit value="{{study.uid}}" (click)="editStudies(studyEdit.value)"><i class="fa fa-pencil"></i></button>
+          <button type="submit" class="btn btn-danger" #studyDelete value="{{study}}" (click)="deleteStudies(studyDelete.value)"><i class="fa fa-trash"></i></button>
+
+        </td>
+      </tr>
+      <tr>
+        <td colspan="6">
+          <button type="submit" class="btn btn-success" id="studyNew" value="" (click)="newStudies()">Nuevo Estudio</button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <h2>Experiencia laboral</h2>
+  <table class="table">
+    <thead>
+      <tr class="table-info">
+        <th scope="col">Empresa</th>
+        <th scope="col">Puesto</th>
+        <th scope="col">Fechas</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let experiencie of user.experiencies">
+
+        <td>{{experiencie.enterprise.name}}</td>
+        <td>{{experiencie.level.name}}</td>
+        <td>{{experiencie.date}}</td>
+
+
+      </tr>
+
+    </tbody>
+  </table>
+
+  <h2>Idiomas</h2>
+  <table class="table">
+    <thead>
+      <tr class="table-info">
+        <th scope="col">Nivel</th>
+        <th scope="col">Idioma</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let language of languages">
+
+        <td>{{language.level.name}}</td>
+        <td>{{language.name.name}}</td>
+        <td>{{language.date}}</td>
+        <td>
+          <button type="submit" class="btn btn-primary" #idiomEdit value="{{language.uid}}" (click)="editLanguage(idiomEdit.value)"><i class="fa fa-pencil"></i></button>
+          <button type="submit" class="btn btn-danger" #idiomDelete value="{{language}}" (click)="deleteLanguage(idiomDelete.value)"><i class="fa fa-trash"></i></button>
+
+        </td>
+      </tr>
+      <tr><td colspan="4"><button type="submit" class="btn btn-success" id="idiomNew" value="" (click)="newLanguage()">Nuevo Idioma</button></td></tr>
+    </tbody>
+  </table>
+
   </div>
-  <div class="column">
-    <label>Acerca de mi...</label>
-    <p>{{user.aboutMe}}</p>
-  </div>
-  <div class="column">
-    <label>Otras competencias</label>
-    <p>{{user.otherCompetences}}</p>
-    <button type="submit" class="btn btn-primary" (click)="editPersonalData()"><i class="fa fa-pencil"></i></button>
-
-  </div>
-</div>
-
-
-
-<h2>Formación académica</h2>
-<table class="table">
-  <thead>
-    <tr class="table-info">
-      <th scope="col">Nivel</th>
-      <th scope="col">Título</th>
-      <th scope="col">Centro</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Certificado</th>
-      <th scope="col">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let study of user.studies">
-
-      <td>{{study.level.name}}</td>
-      <td>{{study.title.name}}</td>
-      <td>{{study.institution.name}}</td>
-      <td>{{study.date}}</td>
-      <td></td>
-      <td style="display:inline-flex">
-
-        <button type="submit" class="btn btn-danger" #studyDelete value="{{study.uid}}" (click)="deleteStudies(studyDelete.value)"><i class="fa fa-trash"></i></button>
-        <button type="submit" class="btn btn-primary" #studyEdit value="{{study.uid}}" (click)="editStudies(studyEdit.value)"><i class="fa fa-pencil"></i></button>
-      </td>
-    </tr>
-    
-  </tbody>
-</table>
-
-<h2>Experiencia laboral</h2>
-<table class="table">
-  <thead>
-    <tr class="table-info">
-      <th scope="col">Empresa</th>
-      <th scope="col">Puesto</th>
-      <th scope="col">Fechas</th>
-
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let experiencie of user.experiencies">
-
-      <td>{{experiencie.enterprise.name}}</td>
-      <td>{{experiencie.level.name}}</td>
-      <td>{{experiencie.date}}</td>
-     
-
-    </tr>
-
-  </tbody>
-</table>
-
-<h2>Idiomas</h2>
-<table class="table">
-  <thead>
-    <tr class="table-info">
-      <th scope="col">Nivel</th>
-      <th scope="col">Idioma</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Acciones</th>
-
-
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let language of user.languages">
-
-      <td>{{language.level.name}}</td>
-      <td>{{language.name.name}}</td>
-      <td>{{language.date}}</td>
-      <td style="display:inline-flex">
-
-        <button type="submit" class="btn btn-danger" #idiomDelete value="{{language.uid}}" (click)="deleteLanguage(idiomDelete.value)"><i class="fa fa-trash"></i></button>
-        <button type="submit" class="btn btn-primary" #idiomEdit value="{{language.uid}}" (click)="editLanguage(idiomEdit.value)"><i class="fa fa-pencil"></i></button>
-      </td>
-    </tr>
-
-  </tbody>
-</table>
-

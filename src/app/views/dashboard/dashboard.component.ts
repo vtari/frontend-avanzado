@@ -18,4 +18,8 @@ export class DashboardComponent implements OnInit {
     gotoProfile(idUser: any) {
         this.router.navigate(['/profile/', idUser]);
     }
+
+    gotoOffers(idUser: any) {
+        this.router.navigate(['/offers/', idUser]);
+    }
 }
