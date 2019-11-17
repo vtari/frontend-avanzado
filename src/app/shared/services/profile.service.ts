@@ -18,6 +18,9 @@ export class ProfileService {
   get user() {
     return this._user;
   }
+    public loadUser(profile: any /* User */): Observable<any /* User */> {
+        return of(this.user as any);
+    }
   loadProfile(): Observable<any /* UserOptions */> {
     return of(this.user as any);
     //return this.http.get<UserOptions>(AppSettings.API_ENDPOINT_USER_ME);
@@ -26,7 +29,8 @@ export class ProfileService {
     /*  this.store$.dispatch(new UserActions.Logout()); */
   }
   public updateProfile(profile: any /* User */): Observable<any /* User */> {
-    return this.http.put<any>(AppSettings.API_ENDPOINT_USERS, { ...profile });
+      //return this.http.put<any>(AppSettings.API_ENDPOINT_USERS, { ...profile });
+      return of(this.user as any);
   }
   public signupProfile(profile: any /* UserOptions */): Observable<boolean> {
     return this.http.post<boolean>(

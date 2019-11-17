@@ -9,6 +9,10 @@ import {
   LanguageName
 } from 'src/app/shared/models/language.model';
 import { dateValidator } from 'src/app/shared/directives/date-validator.directive';
+import { Store } from '@ngrx/store';
+import { UpdateProfile } from '../../../../shared/storage/user/user.actions';
+import { AppState } from '../../../../shared/storage/app.states';
+
 
 @Component({
   selector: 'app-profile-language',
@@ -24,7 +28,8 @@ export class ProfileLanguageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private profileService: ProfileService
+      private profileService: ProfileService,
+      private store: Store<AppState>
   ) {
     this.route.params.subscribe(params => {
       const user = this.profileService.user;
@@ -52,7 +57,8 @@ export class ProfileLanguageComponent implements OnInit {
       ])
     });
   }
-  public submit() {
+    public submit() {
+
     this.saveOrUpdate({ ...this.language, ...this.rForm.value });
   }
 
@@ -68,8 +74,10 @@ export class ProfileLanguageComponent implements OnInit {
     const foundIndex = languages.findIndex(
       _language => _language.uid === language.uid
     );
-    languages[foundIndex] = language;
-    this.profileService.updateProfile(user);
+      languages[foundIndex] = language;
+     
+      this.store.dispatch(new UpdateProfile(user));
+    //this.profileService.updateProfile(user);
     this.router.navigate(['/admin/profile']);
   }
   private save(language: Language) {
@@ -78,8 +86,10 @@ export class ProfileLanguageComponent implements OnInit {
       user.languages,
       language
     );
-    user.languages = [...user.languages, _language];
-    this.profileService.updateProfile(user);
+      user.languages = [...user.languages, _language];
+     
+      this.store.dispatch(new UpdateProfile(user));
+   // this.profileService.updateProfile(user);
     this.router.navigate(['/admin/profile']);
   }
 

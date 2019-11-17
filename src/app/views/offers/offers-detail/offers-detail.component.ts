@@ -4,6 +4,9 @@ import { Offer } from 'src/app/shared/models/offer.model';
 import { ProfileService } from 'src/app/shared/services/profile.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/shared/models/user.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../shared/storage/app.states';
+import { Suscribe, Unsuscribe } from '../../../shared/storage/offers/offers.actions';
 
 @Component({
   selector: 'app-offers-detail',
@@ -17,7 +20,8 @@ export class OffersDetailComponent implements OnInit {
     private profileService: ProfileService,
     private offersService: OffersService,
     private route: ActivatedRoute,
-    private router: Router
+      private router: Router,
+    private store: Store<AppState>
   ) {
     this.user = this.profileService.user;
     this.route.params.subscribe(params => {
@@ -29,13 +33,16 @@ export class OffersDetailComponent implements OnInit {
   }
 
   subscribeOffer() {
-    this.user.offers = [...this.user.offers, this.offer];
+      this.user.offers = [...this.user.offers, this.offer];
+      this.store.dispatch(new Suscribe(this.user.offers));
+
     this.router.navigate(['/admin/profile']);
   }
   unsubscribeOffer() {
     this.user.offers = this.user.offers.filter(
       _offer => _offer.id !== this.offer.id
-    );
+      );
+      this.store.dispatch(new Unsuscribe(this.user.offers));
     this.router.navigate(['/admin/profile']);
   }
   isSubscribe(): boolean {

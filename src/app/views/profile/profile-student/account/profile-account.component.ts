@@ -11,6 +11,10 @@ import {
   Province
 } from 'src/app/shared/models/user.model';
 import { documentNumberValidator } from 'src/app/shared/directives/document-number-validator.directive';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../shared/storage/app.states';
+import { UpdateProfile } from '../../../../shared/storage/user/user.actions';
+
 
 @Component({
   selector: 'app-profile-account',
@@ -24,7 +28,7 @@ export class ProfileAccountComponent implements OnInit {
   municipes: Municipe[];
   provinces: Province[];
 
-  constructor(private router: Router, private profileService: ProfileService) {
+    constructor(private router: Router, private profileService: ProfileService, private store: Store<AppState>) {
     this.user = this.profileService.user;
   }
   ngOnInit() {
@@ -90,8 +94,10 @@ export class ProfileAccountComponent implements OnInit {
 
   public save() {
     const user = { ...this.profileService.user, ...this.rForm.value };
-    this.profileService.user = user;
-    this.profileService.updateProfile(user);
+      this.profileService.user = user;
+      
+      this.store.dispatch(new UpdateProfile(user));
+   // this.profileService.updateProfile(user);
     this.router.navigate(['/admin/profile']);
   }
   compareByUID(option1, option2) {

@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProfileService } from '../../../shared/services/profile.service';
 import { User } from 'src/app/shared/models/user.model';
+import { Store, select } from '@ngrx/store';
+import { GetProfile, UpdateProfile, UserActionTypes, LoadUser } from '../../../shared/storage/user/user.actions';
+import { AppState } from '../../../shared/storage/app.states';
+import * as fromUsers from '../../../shared/storage/user/user.reducers';
+import { tap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile-student',
@@ -8,10 +14,18 @@ import { User } from 'src/app/shared/models/user.model';
   styleUrls: ['./profile-student.component.scss']
 })
 export class ProfileStudentComponent {
-  user: User;
-  constructor(private profileService: ProfileService) {
-    this.user = this.profileService.user;
+    user: User;
+    user$: Observable<User>;
+    constructor(private profileService: ProfileService, private store: Store<AppState>) {
+        this.user = this.profileService.user;
+        this.store.dispatch(new LoadUser(this.user));
+        this.user$ = this.store.select(state => state.userState);
+        this.user$.toPromise().then(result => console.log(result.email));
+        this.store.dispatch(new GetProfile());
   }
+
+    
+   
 
   deleteStudy(studyID: number) {
     const studies = this.user.studies;
@@ -20,8 +34,10 @@ export class ProfileStudentComponent {
       alert('Error: Study not found');
       return;
     }
-    studies.splice(index, 1);
-    this.profileService.updateProfile(this.user);
+      studies.splice(index, 1);
+      
+      this.store.dispatch(new UpdateProfile(this.user));
+  //  this.profileService.updateProfile(this.user);
   }
   deleteLanguage(languageID: any) {
     const languages = this.user.languages;
@@ -30,7 +46,9 @@ export class ProfileStudentComponent {
       alert('Error: Language not found');
       return;
     }
-    languages.splice(index, 1);
-    this.profileService.updateProfile(this.user);
+      languages.splice(index, 1);
+      
+      this.store.dispatch(new UpdateProfile(this.user));
+    //this.profileService.updateProfile(this.user);
   }
 }

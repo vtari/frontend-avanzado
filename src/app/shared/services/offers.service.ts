@@ -3,14 +3,18 @@ import { AppSettings } from '../app.settings';
 import { HttpClient } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { Offer } from '../models/offer.model';
+import { ProfileService } from './profile.service';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class OffersService {
   private _offers: Offer[] = [{}] as Offer[];
-
+   
   constructor(
-    private http: HttpClient /* , private store$: Store<AppStore> */
-  ) {}
+      private http: HttpClient, /* , private store$: Store<AppStore> */
+  ) {
+      
+  }
 
   set offers(_offers) {
     this._offers = _offers;
@@ -22,4 +26,7 @@ export class OffersService {
   getOffers() {
     return this.http.get<any>(AppSettings.API_ENDPOINT_OFFERS);
   }
+
+
+    
 }

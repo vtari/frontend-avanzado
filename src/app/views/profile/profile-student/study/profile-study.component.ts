@@ -8,6 +8,9 @@ import {
   CollegeStudy
 } from 'src/app/shared/models/study.model';
 import { MockData } from 'src/app/shared/mock-data';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../shared/storage/app.states';
+import { UpdateProfile } from '../../../../shared/storage/user/user.actions';
 
 @Component({
   selector: 'app-profile-study',
@@ -22,8 +25,10 @@ export class ProfileStudyComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private profileService: ProfileService
+      private profileService: ProfileService,
+      private store: Store<AppState>
   ) {
+      
     this.route.params.subscribe(params => {
       const user = this.profileService.user;
       const uid = +params.uid;
@@ -31,6 +36,7 @@ export class ProfileStudyComponent {
         | VocationalStudy
         | CollegeStudy;
     });
+     
     this.studiesForm = new FormGroup({
       option: new FormControl(this.study.level, [Validators.required])
     });
@@ -43,8 +49,10 @@ export class ProfileStudyComponent {
     const user = this.profileService.user;
     const studies = user.studies;
     const foundIndex = studies.findIndex(_study => _study.uid === study.uid);
-    studies[foundIndex] = study;
-    this.profileService.updateProfile(user);
+      studies[foundIndex] = study;
+      
+      this.store.dispatch(new UpdateProfile(user));
+   // this.profileService.updateProfile(user);
     this.router.navigate(['/admin/profile']);
   }
   private save(study: VocationalStudy | CollegeStudy) {
@@ -53,8 +61,11 @@ export class ProfileStudyComponent {
       user.studies,
       study
     );
-    user.studies = [...user.studies, _study];
-    this.profileService.updateProfile(user);
+      user.studies = [...user.studies, _study];
+      
+      this.store.dispatch(new UpdateProfile(user));
+     
+    //this.profileService.updateProfile(user);
     this.router.navigate(['/admin/profile']);
   }
 
