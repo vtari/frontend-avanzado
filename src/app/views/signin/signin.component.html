@@ -37,16 +37,14 @@
                 </td>
               </tr>
             </table>
-
+            <mat-card-actions class="buttons">
+                <button mat-raised-button  type="submit" [disabled]="loginForm.invalid" color="primary">
+                  Login
+                </button>
+                <a routerLink="/forgot-password" class="btn btn-link">Remember password</a>
+              </mat-card-actions>
           </form>
-        </mat-card-content>
-
-        <mat-card-actions class="buttons">
-          <button mat-raised-button [disabled]="loginForm.invalid" class="btn btn-primary">
-            Login
-          </button>
-          <a routerLink="/forgot-password" class="btn btn-link">Remember password</a>
-        </mat-card-actions>
+        </mat-card-content>   
   
 
     </mat-card>
